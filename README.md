@@ -1,6 +1,6 @@
-# roibeardcoughlan.com
+# Vast Horizons
 
-A lightweight personal consulting website for Roibéard Coughlan, focused on practical workflow improvement, automation and appropriate uses of AI.
+A lightweight business website for Vast Horizons, an AI, workflow and automation consultancy focused on practical improvements for businesses in Ireland.
 
 ## Structure
 

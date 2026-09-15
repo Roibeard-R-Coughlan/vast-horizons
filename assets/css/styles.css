@@ -35,9 +35,10 @@ p { text-wrap: pretty; }
 .site-header.is-scrolled { border-color: var(--line); }
 .nav-wrap { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
 .brand { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; font-weight: 700; letter-spacing: -.015em; }
-.brand-mark { display: block; flex: 0 0 auto; width: 38px; height: 38px; }
-.brand-mark img { width: 100%; height: 100%; object-fit: contain; }
-.brand-name { display: inline-flex; align-items: center; gap: .7rem; }
+.brand-mark { position: relative; display: grid; flex: 0 0 auto; width: 38px; height: 38px; place-items: center; border: 1px solid var(--ink); color: var(--ink); font-family: var(--serif); font-size: .78rem; font-weight: 700; letter-spacing: -.08em; line-height: 1; }
+.brand-mark::after { content: ""; position: absolute; left: -3px; right: -3px; top: 50%; height: 1px; background: currentColor; transform: rotate(-12deg); }
+.brand-name { position: relative; display: inline-flex; align-items: center; gap: .7rem; }
+.brand-name::after { content: ""; position: absolute; left: 0; right: 0; top: 52%; height: 1px; background: currentColor; opacity: .48; transform: rotate(-2deg); pointer-events: none; }
 .brand-name::before { content: ""; width: 1px; height: 24px; background: #aeb8b4; }
 .primary-nav { display: flex; align-items: center; gap: 1.75rem; }
 .primary-nav > a:not(.button) { position: relative; text-decoration: none; color: #314a49; font-size: .93rem; font-weight: 600; }

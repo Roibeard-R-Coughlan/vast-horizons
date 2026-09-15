@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://roibeardcoughlan.com/sitemap.xml
+Sitemap: https://vasthorizons.ie/sitemap.xml
