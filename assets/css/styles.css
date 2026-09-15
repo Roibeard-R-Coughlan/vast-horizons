@@ -407,6 +407,7 @@ h2 { margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.35rem, 5vw,
 .closing-cta h2 { max-width: 760px; font-size: clamp(2.25rem, 4vw, 3.65rem); }
 .closing-cta .eyebrow { color: var(--accent-light); }
 .closing-cta p:not(.eyebrow) { max-width: 650px; margin: 1rem 0 0; color: #b9c6c2; }
+.closing-cta p.closing-brand-line { margin-top: .85rem; color: #dce4e1; font-size: 1.05rem; font-weight: 600; letter-spacing: .01em; }
 .closing-cta .button { white-space: nowrap; }
 .closing-cta .button { border-color: var(--accent-light); background: var(--ink); color: var(--white); }
 .closing-cta .button:hover, .closing-cta .button:focus-visible { border-color: var(--accent-light); background: var(--paper); color: var(--ink-deep); box-shadow: 0 4px 10px rgba(16, 28, 31, .12); }
@@ -416,6 +417,7 @@ h2 { margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.35rem, 5vw,
 .footer-main { display: grid; grid-template-columns: minmax(220px, 1.2fr) .6fr minmax(225px, 1fr) .65fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
 .footer-brand { margin-bottom: .7rem; }
 .footer-identity p { max-width: 420px; margin: 0; color: #aebebb; font-size: .85rem; }
+.footer-identity p.footer-statement { margin-bottom: .28rem; color: #dce4e1; font-size: .95rem; font-weight: 600; letter-spacing: .01em; }
 .footer-group { display: grid; align-content: start; gap: .42rem; }
 .footer-group a { color: #dce4e1; font-size: .86rem; line-height: 1.45; text-underline-offset: .25rem; }
 .footer-label { margin: 0 0 .35rem; color: #92a6a1; font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
