@@ -30,12 +30,11 @@ document.querySelectorAll('[data-year]').forEach((element) => { element.textCont
 const rotatingPhrase = document.querySelector('[data-rotating-phrase]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const phrases = rotatingPhrase?.dataset.phrases?.split('|').filter(Boolean) ?? [];
-const homeHero = document.querySelector('[data-home-hero]');
-const heroVideo = document.querySelector('[data-hero-video]');
-
-if (homeHero && heroVideo) {
+document.querySelectorAll('[data-hero-video]').forEach((heroVideo) => {
+  const videoHero = heroVideo.closest('[data-home-hero], [data-video-hero]');
+  if (!videoHero) return;
   let heroIsVisible = true;
-  const heroPlaybackRate = 0.7;
+  const heroPlaybackRate = Number(heroVideo.dataset.playbackRate) || 0.7;
 
   heroVideo.defaultPlaybackRate = heroPlaybackRate;
   heroVideo.playbackRate = heroPlaybackRate;
@@ -78,7 +77,7 @@ if (homeHero && heroVideo) {
       if (heroIsVisible) playVideo();
       else pauseVideo();
     }, { threshold: [0, 0.12, 0.5] });
-    videoObserver.observe(homeHero);
+    videoObserver.observe(videoHero);
   }
 
   document.addEventListener('visibilitychange', () => {
@@ -88,7 +87,7 @@ if (homeHero && heroVideo) {
 
   reduceMotion.addEventListener?.('change', updateMotionPreference);
   updateMotionPreference();
-}
+});
 
 const constructionHero = document.querySelector('.construction-hero');
 const constructionVideo = document.querySelector('[data-construction-hero-video]');

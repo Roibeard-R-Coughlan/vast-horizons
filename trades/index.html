@@ -29,11 +29,19 @@
   </header>
 
   <main id="main">
-    <section class="hero trades-hero targeted-hero">
-      <div class="shell hero-grid">
-        <div class="hero-copy">
+    <section class="trades-hero" aria-labelledby="trades-hero-title">
+      <div class="trades-hero-main" data-video-hero>
+        <div class="trades-hero-media" aria-hidden="true">
+          <img class="trades-hero-poster" src="/assets/images/trades-hero-poster.jpg" alt="" fetchpriority="high">
+          <video class="trades-hero-video" data-hero-video data-playback-rate="0.9" muted loop playsinline preload="auto" tabindex="-1">
+            <source src="/assets/video/trades-mix-hero.mp4" type="video/mp4">
+          </video>
+          <span class="trades-hero-overlay"></span>
+        </div>
+        <div class="shell hero-grid">
+          <div class="hero-copy">
           <p class="eyebrow">For builders, trades &amp; field-service businesses · Ireland</p>
-          <h1>The working day ends.<br><em>The admin often doesn't.</em></h1>
+          <h1 id="trades-hero-title">The working day ends.<br><em>The admin often doesn't.</em></h1>
           <p class="hero-rotation" aria-label="Time disappears in missed enquiries, quote follow-ups, scheduling jobs, customer updates, evening admin, and work everyone accepts as part of the job.">
             <span class="hero-rotation-label" aria-hidden="true">Time disappears in</span>
             <span class="hero-rotation-window" aria-hidden="true"><span data-rotating-phrase data-phrases="missed enquiries.|quote follow-ups.|scheduling jobs.|customer updates.|evening admin.|work everyone accepts as part of the job.">missed enquiries.</span></span>
@@ -42,13 +50,14 @@
           <p class="technology-note">Support the team, cover repetitive gaps and keep work moving when people are unavailable.</p>
           <div class="hero-actions"><a class="button" href="#book">Book a Free Assessment <span aria-hidden="true">↗</span></a><a class="text-link" href="#audit">See how the assessment works <span aria-hidden="true">↓</span></a></div>
           <p class="availability-badge hero-availability"><span aria-hidden="true"></span> Introductory availability — currently offered at no cost</p>
+          </div>
         </div>
-        <aside class="project-card trades-flow-card" aria-label="Example workflow from enquiry to completed job">
+      </div>
+      <aside class="shell trades-flow-card" aria-label="Example workflow from enquiry to completed job">
           <div class="project-card-head"><p>From enquiry to completed job</p><span>Example</span></div>
           <div class="project-flow"><div><span>01</span><p>Enquiry</p><small>Capture · sort · respond</small></div><div><span>02</span><p>Quote &amp; schedule</p><small>Prepare · follow up · book</small></div><div><span>03</span><p>Job &amp; record</p><small>Update · note · retain</small></div><div><span>04</span><p>Invoice &amp; follow-up</p><small>Issue · remind · close</small></div></div>
           <p class="project-card-note">The assessment looks for practical gaps where information stalls, gets repeated or depends on someone being available.</p>
-        </aside>
-      </div>
+      </aside>
     </section>
 
     <section class="trust-strip" aria-label="Service principles"><div class="shell trust-grid three"><p><span>01</span>Support the people doing the work</p><p><span>02</span>Practical gaps considered first</p><p><span>03</span>Human judgement stays visible</p></div></section>
@@ -70,8 +79,8 @@
       <div class="shell construction-audit-grid">
         <div><p class="eyebrow">The assessment</p><h2>Start with the work that keeps getting in the way.</h2><p class="large-copy">Together, we look at where time or value may be being lost, identify the strongest opportunities and explore what a better way of working could look like.</p></div>
         <ol class="audit-detail-list">
-          <li><span>01</span><div><h3>Understand what is happening</h3><p>Enquiries, quotes, schedules, job information, customer contact and paperwork.</p></div></li>
-          <li><span>02</span><div><h3>Find the strongest opportunities</h3><p>Waiting, chasing, re-entry, missed context and evening administration.</p></div></li>
+          <li><span>01</span><div><h3>Understand what is happening</h3><p>Follow the job from first enquiry through quotes and scheduling to job records, customer updates, invoicing and follow-up.</p></div></li>
+          <li><span>02</span><div><h3>Find the strongest opportunities</h3><p>Look for waiting, chasing, repeated entry, missed context and evening paperwork. Notice where information stalls or work depends on someone being available.</p></div></li>
           <li><span>03</span><div><h3>Explore what better could look like</h3><p>Shape a clearer direction around what is worth pursuing.</p></div></li>
         </ol>
       </div>
