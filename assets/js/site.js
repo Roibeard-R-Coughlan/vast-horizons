@@ -35,16 +35,66 @@ document.querySelectorAll('[data-hero-video]').forEach((heroVideo) => {
   if (!videoHero) return;
   let heroIsVisible = true;
   const heroPlaybackRate = Number(heroVideo.dataset.playbackRate) || 0.7;
+  const loopFrame = videoHero.querySelector('[data-hero-loop-frame]');
+  const loopMist = videoHero.querySelector('[data-hero-loop-mist]');
+  let loopAnimations = [];
+  let loopVersion = 0;
+  let restartingLoop = false;
+
+  const resetLoopTransition = () => {
+    loopVersion += 1;
+    loopAnimations.forEach((animation) => animation.cancel());
+    loopAnimations = [];
+    restartingLoop = false;
+    if (loopFrame) loopFrame.hidden = true;
+  };
+  const restartLoop = () => {
+    if (restartingLoop || reduceMotion.matches || !heroIsVisible || document.hidden) return;
+    const context = loopFrame?.getContext('2d', { alpha: false });
+    if (context && heroVideo.readyState >= 2) {
+      loopFrame.width = Math.min(960, heroVideo.videoWidth);
+      loopFrame.height = Math.round(loopFrame.width * heroVideo.videoHeight / heroVideo.videoWidth);
+      context.drawImage(heroVideo, 0, 0, loopFrame.width, loopFrame.height);
+      loopFrame.hidden = false;
+      restartingLoop = true;
+      const version = loopVersion;
+      const timing = { duration: 2200, easing: 'ease-in-out', fill: 'forwards' };
+      loopAnimations = [
+        heroVideo.animate([{ opacity: 0 }, { opacity: .85 }], timing),
+        loopFrame.animate([
+          { opacity: .85, filter: 'saturate(.7) contrast(1.08) brightness(.82) blur(0px)' },
+          { opacity: 0, filter: 'saturate(.7) contrast(1.08) brightness(.82) blur(12px)' }
+        ], timing)
+      ];
+      if (loopMist) loopAnimations.push(loopMist.animate([
+        { opacity: 0 }, { opacity: .12, offset: .45 }, { opacity: 0 }
+      ], timing));
+      Promise.all(loopAnimations.map((animation) => animation.finished)).then(() => {
+        if (version === loopVersion) resetLoopTransition();
+      }).catch(() => {});
+    }
+    heroVideo.currentTime = 0;
+    heroVideo.play().catch(() => {});
+  };
 
   heroVideo.defaultPlaybackRate = heroPlaybackRate;
   heroVideo.playbackRate = heroPlaybackRate;
   const revealVideo = () => heroVideo.classList.add('is-ready');
-  const pauseVideo = () => heroVideo.pause();
+  const pauseVideo = () => {
+    heroVideo.pause();
+    loopAnimations.forEach((animation) => animation.pause());
+  };
   const playVideo = () => {
     if (reduceMotion.matches || !heroIsVisible || document.hidden) return;
+    loopAnimations.forEach((animation) => animation.play());
+    if (loopFrame && heroVideo.ended) {
+      restartLoop();
+      return;
+    }
     heroVideo.play().catch(() => {});
   };
   const showStaticFrame = () => {
+    resetLoopTransition();
     pauseVideo();
 
     const seekToPosterFrame = () => {
@@ -70,6 +120,7 @@ document.querySelectorAll('[data-hero-video]').forEach((heroVideo) => {
   };
 
   heroVideo.addEventListener('loadeddata', revealVideo, { once: true });
+  if (loopFrame) heroVideo.addEventListener('ended', restartLoop);
 
   if ('IntersectionObserver' in window) {
     const videoObserver = new IntersectionObserver(([entry]) => {

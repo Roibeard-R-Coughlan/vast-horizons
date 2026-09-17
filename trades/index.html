@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="/assets/images/vh-logo.png">
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
-<body>
+<body class="trades-page">
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header" data-header>
     <div class="shell nav-wrap">
@@ -33,9 +33,11 @@
       <div class="trades-hero-main" data-video-hero>
         <div class="trades-hero-media" aria-hidden="true">
           <img class="trades-hero-poster" src="/assets/images/trades-hero-poster.jpg" alt="" fetchpriority="high">
-          <video class="trades-hero-video" data-hero-video data-playback-rate="0.9" muted loop playsinline preload="auto" tabindex="-1">
+          <video class="trades-hero-video" data-hero-video data-playback-rate="0.9" muted playsinline preload="auto" tabindex="-1">
             <source src="/assets/video/trades-mix-hero.mp4" type="video/mp4">
           </video>
+          <canvas class="trades-hero-loop-frame" data-hero-loop-frame hidden></canvas>
+          <span class="trades-hero-loop-mist" data-hero-loop-mist></span>
           <span class="trades-hero-overlay"></span>
         </div>
         <div class="shell hero-grid">
@@ -53,41 +55,44 @@
           </div>
         </div>
       </div>
-      <aside class="shell trades-flow-card" aria-label="Example workflow from enquiry to completed job">
-          <div class="project-card-head"><p>From enquiry to completed job</p><span>Example</span></div>
-          <div class="project-flow"><div><span>01</span><p>Enquiry</p><small>Capture · sort · respond</small></div><div><span>02</span><p>Quote &amp; schedule</p><small>Prepare · follow up · book</small></div><div><span>03</span><p>Job &amp; record</p><small>Update · note · retain</small></div><div><span>04</span><p>Invoice &amp; follow-up</p><small>Issue · remind · close</small></div></div>
-          <p class="project-card-note">The assessment looks for practical gaps where information stalls, gets repeated or depends on someone being available.</p>
-      </aside>
     </section>
 
-    <section class="trust-strip" aria-label="Service principles"><div class="shell trust-grid three"><p><span>01</span>Support the people doing the work</p><p><span>02</span>Practical gaps considered first</p><p><span>03</span>Human judgement stays visible</p></div></section>
-
-    <section class="section" id="drains">
-      <div class="shell split-heading"><div><p class="eyebrow">Common time drains</p><h2>The admin around the job is often where time gets lost.</h2></div><div class="section-intro"><p>The opportunity may be a clearer process, a better template or a small automation. The useful starting point is understanding what repeatedly interrupts the team or spills into the evening.</p></div></div>
-      <div class="shell opportunity-grid">
-        <article><span>01</span><h3>Missed &amp; after-hours enquiries</h3><p>Capture the caller's need, location and preferred response so a useful follow-up can happen when the team is free.</p></article>
-        <article><span>02</span><h3>Quotes &amp; follow-ups</h3><p>Prepare consistent information, track what was sent and prompt the next appropriate contact without constant checking.</p></article>
-        <article><span>03</span><h3>Scheduling &amp; customer updates</h3><p>Keep appointments, changes and arrival information clearer for both the team and the customer.</p></article>
-        <article><span>04</span><h3>Job notes &amp; records</h3><p>Turn site notes, photos and key details into a structured record that is easier to find later.</p></article>
-        <article><span>05</span><h3>Invoices &amp; paperwork</h3><p>Reduce repeated entry, organise supporting documents and make outstanding administration more visible.</p></article>
-        <article><span>06</span><h3>Recurring communications</h3><p>Support reminders, confirmations and routine updates while keeping people in control of exceptions.</p></article>
+    <section class="section trades-drains" id="drains" aria-labelledby="trades-drains-title">
+      <div class="shell split-heading"><div><p class="eyebrow">Common time drains</p><h2 id="trades-drains-title">Where could work be simpler?</h2></div><div class="section-intro"><p>Start with what interrupts the day or follows you home. These three areas are often worth a closer look.</p></div></div>
+      <div class="shell trades-drain-grid">
+        <article><p class="trades-drain-stage">Before the job</p><h3>Enquiries &amp; quotes</h3><p>Capture missed enquiries and keep quotes moving with clearer follow-ups.</p></article>
+        <article><p class="trades-drain-stage">During the job</p><h3>Jobs &amp; updates</h3><p>Keep schedules, job notes and customer updates in a clearer flow.</p></article>
+        <article><p class="trades-drain-stage">After the job</p><h3>Paperwork &amp; payments</h3><p>Reduce repeated entry and make invoices, reminders and outstanding admin easier to track.</p></article>
       </div>
-      <p class="examples-note shell"><strong>These are examples to assess, not completed-client claims.</strong> Suitability depends on the business, its customers, existing tools and the judgement required.</p>
+      <div class="shell trades-drain-footer"><p>Examples to assess, shaped around your business.</p><a class="text-link" href="#audit">See how the assessment works <span aria-hidden="true">↓</span></a></div>
     </section>
 
     <section class="section dark-section" id="audit">
       <div class="shell construction-audit-grid">
-        <div><p class="eyebrow">The assessment</p><h2>Start with the work that keeps getting in the way.</h2><p class="large-copy">Together, we look at where time or value may be being lost, identify the strongest opportunities and explore what a better way of working could look like.</p></div>
+        <div><p class="eyebrow">The assessment</p><h2>Start with one recurring problem.</h2><p class="large-copy">Together, we look at what happens, where time or value is lost and which improvements are worth pursuing.</p></div>
         <ol class="audit-detail-list">
-          <li><span>01</span><div><h3>Understand what is happening</h3><p>Follow the job from first enquiry through quotes and scheduling to job records, customer updates, invoicing and follow-up.</p></div></li>
-          <li><span>02</span><div><h3>Find the strongest opportunities</h3><p>Look for waiting, chasing, repeated entry, missed context and evening paperwork. Notice where information stalls or work depends on someone being available.</p></div></li>
-          <li><span>03</span><div><h3>Explore what better could look like</h3><p>Shape a clearer direction around what is worth pursuing.</p></div></li>
+          <li><span>01</span><div><h3>Understand the work</h3><p>Follow the job from enquiry and quote through scheduling, job records, invoicing and follow-up.</p></div></li>
+          <li><span>02</span><div><h3>Find what slows it down</h3><p>Look for waiting, chasing, repeated entry and missing details, especially where work stalls or depends on one person being available.</p></div></li>
+          <li><span>03</span><div><h3>Choose what is worth improving</h3><p>Prioritise the strongest opportunities, how significant they appear and which improvements are worth pursuing.</p></div></li>
         </ol>
       </div>
-      <div class="shell implementation-statement"><p><strong>The assessment helps identify where the strongest opportunities may be, how significant they appear, and which ones are worth pursuing.</strong> Where an opportunity is worth pursuing, Vast Horizons designs, builds and implements the solution — whether that means improving the process, connecting existing systems, building an automation or applying AI where it adds real value.</p></div>
+      <details class="shell trades-assessment-examples">
+        <summary>See examples of work we can assess</summary>
+        <div class="trades-example-grid">
+          <div><h3>Enquiries</h3><p>Capture the caller's need, location and preferred response so follow-up reaches the right person.</p></div>
+          <div><h3>Quotes</h3><p>Prepare consistent quotes, track what was sent and prompt the next appropriate follow-up.</p></div>
+          <div><h3>Scheduling</h3><p>Keep bookings, changes, arrival information and confirmations clearer for the team and customer.</p></div>
+          <div><h3>Job records</h3><p>Turn site notes, photos and key details into a structured record that is easy to find later.</p></div>
+          <div><h3>Invoices &amp; paperwork</h3><p>Reduce repeated entry, organise supporting documents and make outstanding invoices and paperwork easier to track.</p></div>
+          <div><h3>Routine communications</h3><p>Support reminders, confirmations and routine updates while people handle exceptions and decide what happens next.</p></div>
+        </div>
+        <p class="trades-example-note">These are examples to assess, not completed-client claims. Suitability depends on your business, customers, existing tools and the judgement required.</p>
+      </details>
+      <div class="shell implementation-statement"><p>Where an improvement is worth pursuing, <strong>Vast Horizons designs, builds and implements the solution:</strong> a clearer process, connected tools, automation or AI where it adds real value.</p></div>
+      <div class="shell trades-assessment-action"><a class="button" href="#book">Book a Free Assessment <span aria-hidden="true">↗</span></a><p>A rough idea is enough to start.</p></div>
     </section>
 
-    <section class="section about-compact"><div class="shell about-compact-grid"><div><p class="eyebrow">When the office is busy — or closed</p><h2>Enquiries and follow-ups do not always wait for a convenient moment.</h2></div><div><p>Calls arrive while people are on jobs. Quotes need attention after the working day. Notes, invoices and customer updates accumulate around the work itself.</p><p>Technology can help capture information and cover predictable steps. It should support the team—not pretend every situation can or should happen without a person.</p><a class="text-link" href="/#about">More about Vast Horizons <span aria-hidden="true">→</span></a></div></div></section>
+    <section class="section about-compact"><div class="shell about-compact-grid"><div><p class="eyebrow">Built around your team</p><h2>Support the team.<br>Keep people in control.</h2></div><div><p>Capture enquiries while you're on a job or the office is closed, and keep predictable follow-ups moving when someone is unavailable.</p><p>Practical gaps come first. A clearer process or template may be enough. Automation and AI should support the team, with people handling exceptions and making the decisions.</p><a class="text-link" href="/#about">More about Vast Horizons <span aria-hidden="true">→</span></a></div></div></section>
 
     <section class="section booking-section" id="book">
       <div class="shell booking-grid">
