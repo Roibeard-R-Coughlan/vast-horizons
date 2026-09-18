@@ -11,6 +11,17 @@ A lightweight business website for Vast Horizons, an AI, workflow and automation
 
 The site is static and deploys through the existing GitHub Pages and `CNAME` setup.
 
+## Logo variants
+
+The updated source artwork is `assets/images/logo-vh.png`. The website uses transparent, 512px PNGs with matching crops:
+
+- `assets/images/logo-vh-on-light.png` — navy lettering for light headers, light browser tabs and the Apple touch icon.
+- `assets/images/logo-vh-on-dark.png` — ivory lettering for dark footers and dark browser tabs.
+
+The ivory version was prepared with the built-in image generation tool, using the previous ivory logo as a colour reference. The edit prompt requested: change only the new logo's navy letter interiors to warm ivory; preserve its letter shapes, gold outlines, frame, swoosh and spacing; retain a transparent background. Both variants are cropped and resized together for website use. The original artwork and previous logo files are retained.
+
+Local visual checks: start `node artifacts/trades-hero/server.cjs`, then run `node artifacts/logo-refresh/verify.cjs`. Preview the site at `http://127.0.0.1:4173/index.html`.
+
 ## Trades hero video
 
 The `/trades/` hero uses `assets/video/trades-mix-hero.mp4`, prepared from the updated `assets/video/drill-mix.mp4`. The web copy removes the export's black side bars, retains the full 60.2-second edit at 30 fps, uses H.264 with no audio, and places MP4 metadata first for faster streaming startup. The page plays it at 90% speed (`data-playback-rate="0.9"`); the slowdown is not baked into the file. Its fallback poster comes from 4.6 seconds into the updated clip. Versioned video and poster URLs refresh cached copies.
