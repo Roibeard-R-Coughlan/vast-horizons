@@ -37,6 +37,13 @@ document.querySelectorAll('[data-hero-video]').forEach((heroVideo) => {
   const heroPlaybackRate = Number(heroVideo.dataset.playbackRate) || 0.7;
   const loopFrame = videoHero.querySelector('[data-hero-loop-frame]');
   const loopMist = videoHero.querySelector('[data-hero-loop-mist]');
+  const playButton = videoHero.querySelector('[data-hero-video-play]');
+  const useNativeLoop = Boolean(loopFrame && window.matchMedia('(pointer: coarse)').matches);
+  if (useNativeLoop) heroVideo.loop = true;
+  heroVideo.muted = true;
+  heroVideo.defaultMuted = true;
+  heroVideo.playsInline = true;
+  heroVideo.autoplay = !reduceMotion.matches;
   let loopAnimations = [];
   let loopVersion = 0;
   let restartingLoop = false;
@@ -74,12 +81,22 @@ document.querySelectorAll('[data-hero-video]').forEach((heroVideo) => {
       }).catch(() => {});
     }
     heroVideo.currentTime = 0;
-    heroVideo.play().catch(() => {});
+    heroVideo.play().catch(handlePlaybackFailure);
   };
 
   heroVideo.defaultPlaybackRate = heroPlaybackRate;
   heroVideo.playbackRate = heroPlaybackRate;
-  const revealVideo = () => heroVideo.classList.add('is-ready');
+  const revealVideo = () => {
+    heroVideo.classList.add('is-ready');
+    if (playButton) playButton.hidden = true;
+  };
+  const handlePlaybackFailure = (error) => {
+    // An intentional pause during scrolling can cancel a pending play request.
+    if (error.name === 'AbortError' || !heroIsVisible || document.hidden) return;
+    resetLoopTransition();
+    heroVideo.classList.remove('is-ready');
+    if (playButton) playButton.hidden = reduceMotion.matches || error.name !== 'NotAllowedError';
+  };
   const pauseVideo = () => {
     heroVideo.pause();
     loopAnimations.forEach((animation) => animation.pause());
@@ -87,11 +104,11 @@ document.querySelectorAll('[data-hero-video]').forEach((heroVideo) => {
   const playVideo = () => {
     if (reduceMotion.matches || !heroIsVisible || document.hidden) return;
     loopAnimations.forEach((animation) => animation.play());
-    if (loopFrame && heroVideo.ended) {
+    if (loopFrame && !useNativeLoop && heroVideo.ended) {
       restartLoop();
       return;
     }
-    heroVideo.play().catch(() => {});
+    heroVideo.play().catch(handlePlaybackFailure);
   };
   const showStaticFrame = () => {
     resetLoopTransition();
@@ -115,12 +132,22 @@ document.querySelectorAll('[data-hero-video]').forEach((heroVideo) => {
     else heroVideo.addEventListener('loadedmetadata', seekToPosterFrame, { once: true });
   };
   const updateMotionPreference = () => {
+    heroVideo.autoplay = !reduceMotion.matches;
+    if (playButton) playButton.hidden = true;
     if (reduceMotion.matches) showStaticFrame();
     else playVideo();
   };
 
-  heroVideo.addEventListener('loadeddata', revealVideo, { once: true });
-  if (loopFrame) heroVideo.addEventListener('ended', restartLoop);
+  heroVideo.addEventListener('playing', revealVideo);
+  const showVideoFallback = () => {
+    resetLoopTransition();
+    heroVideo.classList.remove('is-ready');
+    if (playButton) playButton.hidden = true;
+  };
+  heroVideo.addEventListener('error', showVideoFallback);
+  heroVideo.querySelectorAll('source').forEach(source => source.addEventListener('error', showVideoFallback));
+  playButton?.addEventListener('click', playVideo);
+  if (loopFrame && !useNativeLoop) heroVideo.addEventListener('ended', restartLoop);
 
   if ('IntersectionObserver' in window) {
     const videoObserver = new IntersectionObserver(([entry]) => {

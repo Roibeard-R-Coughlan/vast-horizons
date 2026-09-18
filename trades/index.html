@@ -33,7 +33,7 @@
       <div class="trades-hero-main" data-video-hero>
         <div class="trades-hero-media" aria-hidden="true">
           <img class="trades-hero-poster" src="/assets/images/trades-hero-poster.jpg" alt="" fetchpriority="high">
-          <video class="trades-hero-video" data-hero-video data-playback-rate="0.9" muted playsinline preload="auto" tabindex="-1">
+          <video class="trades-hero-video" data-hero-video data-playback-rate="0.9" autoplay muted playsinline poster="/assets/images/trades-hero-poster.jpg" preload="auto" tabindex="-1">
             <source src="/assets/video/trades-mix-hero.mp4" type="video/mp4">
           </video>
           <canvas class="trades-hero-loop-frame" data-hero-loop-frame hidden></canvas>
@@ -42,6 +42,7 @@
         </div>
         <div class="shell hero-grid">
           <div class="hero-copy">
+          <button class="trades-video-play" type="button" data-hero-video-play hidden>Play background video</button>
           <p class="eyebrow">For builders, trades &amp; field-service businesses · Ireland</p>
           <h1 id="trades-hero-title">The working day ends.<br><em>The admin often doesn't.</em></h1>
           <p class="hero-rotation" aria-label="Time disappears in missed enquiries, quote follow-ups, scheduling jobs, customer updates, evening admin, and work everyone accepts as part of the job.">

@@ -446,6 +446,7 @@ h2 { margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.35rem, 5vw,
 .trades-hero-main {
   position: relative;
   isolation: isolate;
+  overflow: hidden;
   background: radial-gradient(circle at 78% 42%, rgba(83, 126, 121, .16), transparent 31%), #0b1417;
   color: #f5f5f0;
 }
@@ -475,7 +476,7 @@ h2 { margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.35rem, 5vw,
 .trades-hero .text-link { color: #f4f3ed; }
 .trades-hero .hero-availability { border-color: rgba(213, 222, 219, .3); color: #b9c5c2; }
 .trades-hero .hero-availability span { background: #8eaaa6; }
-.trades-hero-media { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
+.trades-hero-media { position: absolute; z-index: 0; inset: 0; overflow: hidden; contain: paint; clip-path: inset(0); pointer-events: none; }
 .trades-hero-video,
 .trades-hero-loop-frame,
 .trades-hero-poster {
@@ -503,7 +504,8 @@ h2 { margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.35rem, 5vw,
   background: radial-gradient(ellipse at 78% 45%, #f7f7f4 0%, rgba(247, 247, 244, .8) 28%, transparent 70%);
   filter: blur(24px);
 }
-.trades-hero-media:has(.trades-hero-video.is-ready) .trades-hero-poster { opacity: 0; transition: opacity 1100ms ease; }
+.trades-hero-media:has(.trades-hero-video.is-ready) .trades-hero-poster { visibility: hidden; opacity: 0; }
+.trades-video-play { margin-bottom: 1rem; padding: .55rem .8rem; border: 1px solid #aac1be; border-radius: var(--radius); background: #0b1417; color: #f4f3ed; cursor: pointer; font-size: .85rem; }
 .trades-hero-overlay {
   position: absolute;
   inset: 0;
@@ -916,7 +918,9 @@ h2 { margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.35rem, 5vw,
   .trades-hero .hero-lead { font-size: 1rem; line-height: 1.52; }
   .trades-hero .technology-note { font-size: .82rem; }
   .trades-hero .hero-availability { align-items: flex-start; border-radius: 3px; }
-  .trades-hero-video, .trades-hero-loop-frame, .trades-hero-poster { inset: 17% -35% auto auto; width: 155%; height: 83%; object-position: 62% center; }
+  /* Keep the video independent of the taller mobile copy and clip its composited layer. */
+  .trades-hero-media { bottom: auto; height: calc(100svh - 70px); max-height: 100%; }
+  .trades-hero-video, .trades-hero-loop-frame, .trades-hero-poster { inset: 0; width: 100%; height: 100%; object-position: 62% center; }
   .trades-hero-overlay { background: linear-gradient(180deg, #0b1417 0%, rgba(11, 20, 23, .97) 24%, rgba(11, 20, 23, .86) 48%, rgba(11, 20, 23, .65) 76%, #0b1417 100%), linear-gradient(90deg, rgba(11, 20, 23, .9), rgba(11, 20, 23, .24)); }
   .trades-drain-grid { grid-template-columns: 1fr; }
   .trades-page section[id] { scroll-margin-top: 84px; }
