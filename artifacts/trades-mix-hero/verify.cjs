@@ -15,7 +15,11 @@ const assert = require('node:assert/strict');
     assert.equal(state.rate, .9);
     assert.equal(state.loop, false);
     assert.equal(state.muted, true);
-    assert.ok(state.source.endsWith('/assets/video/trades-mix-hero.mp4'));
+    assert.equal(new URL(state.source).pathname, '/assets/video/trades-mix-hero.mp4');
+    assert.equal(new URL(state.source).searchParams.get('v'), '20260918-drill-mix');
+    assert.equal(state.width, 572);
+    assert.equal(state.height, 1080);
+    assert.ok(Math.abs(state.duration - 60.2) < .1);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width);
     await page.screenshot({ path: `artifacts/trades-mix-hero/mix-${width}x${height}.png` });
     if (width === 1440 || width === 390) {
